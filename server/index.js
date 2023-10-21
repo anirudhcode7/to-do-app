@@ -1,24 +1,25 @@
 const express = require('express');
-const mongoose = require('mongoose');
-require('dotenv').config(); // If using environment variables
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const authRoutes = require('./routes/auth'); // Import your authentication routes
+// Import other routes as needed
+const db = require('./db'); // Import the database connection
 
+// Create an instance of the Express application
 const app = express();
 
-// Establish the MongoDB connection
-const dbURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/your-database-name';
-mongoose.connect(dbURL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Middleware for parsing JSON and handling CORS
+app.use(bodyParser.json());
+app.use(cors());
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+// Use your authentication routes
+app.use('/api/auth', authRoutes);
 
-// Set up your server's routes and middleware here
+// Define and use other routes here
 
+// Define other server setup, middleware, and error handling as needed
+
+// Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
