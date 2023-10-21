@@ -20,8 +20,7 @@ register = async (req, res) => {
       }
   
       // Create a new user document and set the virtual 'password' field
-      const newUser = new User({ username });
-      newUser.password = password; // Set the virtual 'password' field
+      const newUser = new User({ username, password });
   
       // Save the user document to the database
       await newUser.save();

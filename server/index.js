@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth'); // Import your authentication routes
 // Import other routes as needed
-const db = require('./db'); // Import the database connection
+const db = require('./config/db'); // Import the database connection
 
 // Create an instance of the Express application
 const app = express();

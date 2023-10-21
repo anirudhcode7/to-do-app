@@ -21,8 +21,6 @@ const userSchema = new mongoose.Schema({
 userSchema
   .virtual('password')
   .set(function (password) {
-    // Generate a unique salt for each user
-    this._salt = crypto.randomBytes(16).toString('hex');
     this.hashed_password = this.encryptPassword(password);
   })
   .get(function () {
@@ -34,6 +32,7 @@ userSchema.methods = {
   encryptPassword: function (password) {
     if (!password) return '';
     try {
+      this.salt = crypto.randomBytes(16).toString('hex');
       return crypto
         .createHmac('sha1', this.salt)
         .update(password)
