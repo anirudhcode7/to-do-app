@@ -21,18 +21,21 @@ const userSchema = new mongoose.Schema({
 userSchema
   .virtual('password')
   .set(function (password) {
+    this._password = password;
+    if (!this.salt) {
+        this.salt = crypto.randomBytes(16).toString('hex');
+    }
     this.hashed_password = this.encryptPassword(password);
   })
   .get(function () {
-    return this.password;
+    return this._password;
   });
 
 userSchema.methods = {
   // Method to hash the password using the user's unique salt
   encryptPassword: function (password) {
-    if (!password) return '';
+    if (!password || !this.salt) return '';
     try {
-      this.salt = crypto.randomBytes(16).toString('hex');
       return crypto
         .createHmac('sha1', this.salt)
         .update(password)
