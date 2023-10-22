@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // Import Axios
 
+
 function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
 
   const handleRegister = async () => {
     try {
@@ -14,7 +16,7 @@ function Register() {
       };
 
       // Send a POST request to the /register route on your server
-      const response = await axios.post('/api/auth/register', data);
+      const response = await axios.post('http://localhost:3004/api/auth/register', data);
 
       // Check the response for success
       if (response.status === 201) {
@@ -51,3 +53,4 @@ function Register() {
 }
 
 export default Register;
+
