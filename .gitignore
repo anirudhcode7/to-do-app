@@ -1,0 +1,39 @@
+# Dependency directories
+client/node_modules/
+server/node_modules/
+
+# Build output directories
+client/build/
+server/dist/
+
+# Environment variable files
+client/.env
+server/.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Firebase private key
+server/firebase.json
+
+# Temporary files
+*.swp
+*.swo
+
